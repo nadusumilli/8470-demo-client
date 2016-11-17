@@ -1,0 +1,114 @@
+{{#if success}}
+	<h1>Welcome {{username}}!</h1>
+	<p>
+	  You have successfully registered using the email {{email}}. We will be sending you a confirmation email. Please check your email to begin testing. (MLH: TODO)
+	</p>
+{{else}}
+	<div class="row">
+		<div class="col-sm-5">
+			<br>
+			<br>
+			<h4 style="text-align: right;">Welcome to democlient Structured Testing</h4>
+			<p style="text-align: right;"><em>Striving today for a safer tomorrow.</em></p>
+		</div>
+		<div class="col-sm-7">
+			<form class="form-inline">
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>Username:</b></p></div>
+					<div class="col-sm-6">
+						{{input type="text" value=username class="col-sm-12 form-control" enter="register" placeholder="Username"}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>Password:</b></p></div>
+					<div class="col-sm-6">
+						{{input type="text" value=password class="col-sm-12 form-control" enter="register" placeholder="Password" type="password"}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>Confirm Password:</b></p></div>
+					<div class="col-sm-6">
+						{{input type="text" value=confirmpassword class="col-sm-12 form-control" enter="register" placeholder="Confirm Password" type="password"}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>Age:</b></p></div>
+					<div class="col-sm-6">
+						{{input type="text" value=age class="col-sm-12 form-control" enter="register" placeholder="age"}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>Gender:</b></p></div>
+					<div class="col-sm-6">
+
+						{{#x-select class="form-control" value=gender as |xs|}}
+							{{#xs.option disabled=true selected=true}}Select most applicable{{/xs.option}}
+							{{#each genders as |g|}}
+								{{#xs.option value=g}}{{g}}{{/xs.option}}
+								
+							{{/each}}
+						{{/x-select}}
+
+
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>Education Level:</b></p></div>
+					<div class="col-sm-6">
+						{{#x-select class="form-control" value=educationLevel as |xs|}}
+							{{#xs.option disabled=true selected=true}}Select highest level achieved{{/xs.option}}
+							{{#each educationLevels as |l|}}
+								{{#xs.option value=l}}{{l}}{{/xs.option}}
+								
+							{{/each}}
+						{{/x-select}}
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>City you live in:</b></p></div>
+					<div class="col-sm-6">
+						{{input type="text" value=city class="col-sm-12 form-control" enter="register" placeholder="city"}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"><p class="right"><b>State:</b></p></div>
+					<div class="col-sm-6">
+						{{#x-select class="form-control" value=state as |xs|}}
+							{{#xs.option disabled=true selected=true}}Select current residence{{/xs.option}}
+							{{#each states as |s|}}
+								{{#xs.option value=s}}{{s}}{{/xs.option}}
+								
+							{{/each}}
+						{{/x-select}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-10">
+						{{#bs-modal open=showPolicy title="Privacy Policy" footer=false}}
+							{{render "privacypolicy"}}
+						{{/bs-modal}}
+						<button class="btn btn-block btn-warning" type="button" {{action "showPolicy"}}>Read Privacy and informed consent policy</button>
+						<p class="right">
+							{{input type="checkbox" name="doesAgree" checked=agree}} I have read and agree to the privacy policy.
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 offset3">
+						<button type="button" class="btn btn-block btn-default" {{action "register"}}>Sign Up for democlient</button>
+					</div>
+				</div>
+				<div class="row">
+					{{#if validationErrorMsg}}
+						<div class="col-sm-7 alert alert-error fade in">
+							{{validationErrorMsg}}
+
+						</div>
+					{{/if}}
+				</div>
+			</form>
+		</div>
+	</div><!--/.row-->
+{{/if}}
