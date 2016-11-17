@@ -1,47 +1,59 @@
 {{#if success}}
-	<h1>Welcome {{username}}!</h1>
-	<p>
-	  You have successfully registered using the email {{email}}. We will be sending you a confirmation email. Please check your email to begin testing. (MLH: TODO)
-	</p>
+	<h1>Welcome {{content.user.username}}!</h1>
 {{else}}
 	<div class="row">
-		<div class="col-sm-5">
-			<br>
-			<br>
-			<h4 style="text-align: right;">Welcome to democlient Structured Testing</h4>
-			<p style="text-align: right;"><em>Striving today for a safer tomorrow.</em></p>
-		</div>
-		<div class="col-sm-7">
+		<div class="col-xs-12" style="margin-left: 15px;">
 			<form class="form-inline">
 				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>Username:</b></p></div>
-					<div class="col-sm-6">
-						{{input type="text" value=username class="col-sm-12 form-control" enter="register" placeholder="Username"}}
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>Username:</b></p></div>
+					<div class="col-sm-4">
+						{{input type="text" value=content.user.username class='form-control reg-input-field' enter="register" placeholder="Username"}}
+					</div>
+					{{#if usernameerror}}
+						<div class="col-sm-5">
+							<p class="reg-label">{{usernameerror}}</p>
+						</div>
+					{{/if}}
+				</div>
+				<div class="row">
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>Password:</b></p></div>
+					<div class="col-sm-4 {{passwordclasses}}">
+						{{input type="text" value=content.user.password class='form-control reg-input-field' enter="register" placeholder="Password" type="password"}}
+					</div>
+					{{#if passworderror}}
+						<div class="col-sm-5">
+							<p class="reg-label">{{passworderror}}</p>
+						</div>
+					{{/if}}
+				</div>
+				<div class="row">
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>Email:</b></p></div>
+					<div class="col-sm-4 {{emailclasses}}">
+						{{input type="text" value=content.user.email class='form-control reg-input-field' enter="register" placeholder="Email"}}
+					</div>
+					{{#if emailerror}}
+						<div class="col-sm-5">
+							<p class="reg-label">{{emailerror}}</p>
+						</div>
+					{{/if}}
+				</div>
+				<div class="row">
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>Confirm Password:</b></p></div>
+					<div class="col-sm-4">
+						{{input type="text" value=confirmpassword class='form-control reg-input-field' enter="register" placeholder="Confirm Password" type="password"}}
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>Password:</b></p></div>
-					<div class="col-sm-6">
-						{{input type="text" value=password class="col-sm-12 form-control" enter="register" placeholder="Password" type="password"}}
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>Age:</b></p></div>
+					<div class="col-sm-4">
+						{{input type="text" value=content.profile.age class='form-control reg-input-field' enter="register" placeholder="age"}}
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>Confirm Password:</b></p></div>
-					<div class="col-sm-6">
-						{{input type="text" value=confirmpassword class="col-sm-12 form-control" enter="register" placeholder="Confirm Password" type="password"}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>Age:</b></p></div>
-					<div class="col-sm-6">
-						{{input type="text" value=age class="col-sm-12 form-control" enter="register" placeholder="age"}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>Gender:</b></p></div>
-					<div class="col-sm-6">
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>Gender:</b></p></div>
+					<div class="col-sm-4">
 
-						{{#x-select class="form-control" value=gender as |xs|}}
+						{{#x-select class='form-control reg-input-field' value=content.profile.gender as |xs|}}
 							{{#xs.option disabled=true selected=true}}Select most applicable{{/xs.option}}
 							{{#each genders as |g|}}
 								{{#xs.option value=g}}{{g}}{{/xs.option}}
@@ -54,9 +66,9 @@
 					
 				</div>
 				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>Education Level:</b></p></div>
-					<div class="col-sm-6">
-						{{#x-select class="form-control" value=educationLevel as |xs|}}
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>Education Level:</b></p></div>
+					<div class="col-sm-4">
+						{{#x-select class='form-control reg-input-field' value=content.profile.educationlevel as |xs|}}
 							{{#xs.option disabled=true selected=true}}Select highest level achieved{{/xs.option}}
 							{{#each educationLevels as |l|}}
 								{{#xs.option value=l}}{{l}}{{/xs.option}}
@@ -67,15 +79,15 @@
 					
 				</div>
 				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>City you live in:</b></p></div>
-					<div class="col-sm-6">
-						{{input type="text" value=city class="col-sm-12 form-control" enter="register" placeholder="city"}}
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>City you live in:</b></p></div>
+					<div class="col-sm-4">
+						{{input type="text" value=content.profile.city class='form-control reg-input-field' enter="register" placeholder="city"}}
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4"><p class="right"><b>State:</b></p></div>
-					<div class="col-sm-6">
-						{{#x-select class="form-control" value=state as |xs|}}
+					<div class="col-sm-3"><p class="pull-right reg-label"><b>State:</b></p></div>
+					<div class="col-sm-4">
+						{{#x-select class='form-control reg-input-field'value=content.profile.state as |xs|}}
 							{{#xs.option disabled=true selected=true}}Select current residence{{/xs.option}}
 							{{#each states as |s|}}
 								{{#xs.option value=s}}{{s}}{{/xs.option}}
@@ -90,13 +102,13 @@
 							{{render "privacypolicy"}}
 						{{/bs-modal}}
 						<button class="btn btn-block btn-warning" type="button" {{action "showPolicy"}}>Read Privacy and informed consent policy</button>
-						<p class="right">
+						<p class="pull-right reg-label">
 							{{input type="checkbox" name="doesAgree" checked=agree}} I have read and agree to the privacy policy.
 						</p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 offset3">
+					<div class="col-sm-3 offset3">
 						<button type="button" class="btn btn-block btn-default" {{action "register"}}>Sign Up for democlient</button>
 					</div>
 				</div>
