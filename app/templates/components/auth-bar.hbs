@@ -1,6 +1,6 @@
 {{#if auth.isLoggedIn}} {{! Display user name and logout button}}
 	<p class="inline pull-right">
-		Hello {{auth.user.username}} {{#if auth.profile.roles.admin}}(admin){{/if}}
+		Hello {{auth.user.username}} {{auth.profile.roles.admin}} {{#if auth.profile.roles.admin}}(admin){{/if}}
 		<button type="button" class="btn btn-sm btn-default" {{action "logout"}}>Log out</button>
 		{{#if auth.profile.roles.admin}}
 			{{#link-to 'admin'}}

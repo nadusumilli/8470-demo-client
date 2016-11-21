@@ -10,14 +10,15 @@ export default Ember.Controller.extend({
 			var user = this.get('content');
 			var t = this;
 			user.get('profile').get('content').save();
-			user.save().then( function(response){
+			user.save().then( //function(response){
 				//Bootstrap.GNM.push('Saved', 'Saved '+user.get('username'), 'success');
-			},function(response){
+			//},
+			function(response){
 				var errMsg = '';
-				if(response.responseText.search('email')!=-1){
+				if(response.responseText.search('email')!==-1){
 					errMsg = "Someone else is using that email";
 				}
-				else if(response.responseText.search('username')!=-1){
+				else if(response.responseText.search('username')!==-1){
 					errMsg = "Someone else is using that username, please select another";
 				}
 				else{
@@ -36,7 +37,7 @@ export default Ember.Controller.extend({
 			user.save().then(function(){/**never gets called**/}, 
 			function(response){//response callback
 				console.log('Response is '+ JSON.stringify(response));
-				if(response.status == 200){
+				if(response.status === 200){
 					//Bootstrap.GNM.push('Item Deleted', 'item removed from database', 'success');
 				}
 				else {//error handler (response.status == 500)

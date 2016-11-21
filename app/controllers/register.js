@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
   }),
   passwordChanged: Ember.observer('content.user.password', function(){
     var user = this.get('content').user;
-    if (user.get('password')==undefined||user.get('password')==''){
+    if (user.get('password')===undefined||user.get('password')===''){
         this.set('passworderror', 'You must specify a password.');
         this.set('passwordclasses', 'has-error');
     }
